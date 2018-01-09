@@ -180,9 +180,9 @@ module.exports.errorLogger = function (opts) {
             }
 
             if (!json) {
-                logFn.call(childLogger, format(meta));
+                logFn.call(childLogger, format(json));
             } else {
-                logFn.call(childLogger, json, format(meta));
+                logFn.call(childLogger, json, format(json));
             }
         }
 
