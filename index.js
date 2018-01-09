@@ -1,6 +1,7 @@
 var bunyan = require('bunyan'),
     has = require('lodash.has'),
     set = require('lodash.set'),
+    clonedeep = require('lodash.clonedeep'),
     useragent = require('useragent'),
     uuid = require('uuid'),
     util = require('util');
@@ -138,7 +139,8 @@ module.exports.errorLogger = function (opts) {
             var level = levelFn(status, err, meta);
             logFn = childLogger[level] ? childLogger[level] : childLogger.info;
 
-            var json = meta;
+            var json = clonedeep(meta);
+
             if (excludes) {
                 json = null;
                 if (!~excludes.indexOf('*')) {
@@ -180,7 +182,7 @@ module.exports.errorLogger = function (opts) {
             }
 
             if (!json) {
-                logFn.call(childLogger, format(json));
+                logFn.call(childLogger, format({}));
             } else {
                 logFn.call(childLogger, json, format(json));
             }
