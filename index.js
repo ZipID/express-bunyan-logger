@@ -222,7 +222,7 @@ function defaultLevelFn(status, err) {
 
 
 function defaultGenReqId(req) {
-  var requestId = uuid.v4();
+  var requestId = uuid.v1();
   req.id = requestId;
   return requestId;
 }
